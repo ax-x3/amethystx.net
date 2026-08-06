@@ -18,7 +18,8 @@ async function updateHits() {
         }
         const resJSON = await res.json();
         const hits = resJSON.hits;
-        document.getElementById("hitcount").innerHTML = hits;
+        const hitsFixedLength = hits.padStart(8, '?');
+        document.getElementById("hitcount").innerHTML = hitsFixedLength.replaceAll("?", "<span class='text num pad'>?</span>");
     } catch (error) {
         console.error(error);
     }

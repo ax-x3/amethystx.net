@@ -332,6 +332,10 @@ marquee {
 .num {
     font-family: "Segris 16", "Splice";
     white-space-collapse: preserve;
+    &.pad {
+        opacity: 0.1;
+        text-shadow: none;
+    }
     &.bg {
         position: absolute;
         opacity: 0.1;
