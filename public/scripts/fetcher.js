@@ -42,8 +42,13 @@ async function updateDiscord() {
             discordSection.className = "danger";
         }
         if (resJSON.data.activities.length != 0) {
-            const status = resJSON.data.activities['0'].state.replace("<", "&lt;").replace(">", "&gt;");
-            statusLabel.innerHTML = status;
+            const status = resJSON.data.activities['0'];
+            if (status.name == "Custom Status") {
+                statusText = status.state.replace("<", "&lt;").replace(">", "&gt;");
+            } else {
+                statusText = "<small>*in " + status.name.replace("<", "&lt;").replace(">", "&gt;") + "*<small>";
+            }
+            statusLabel.innerHTML = statusText;
         } else {
             statusLabel.innerHTML = "<small>*the keeper is silent now*</small>";
         }
