@@ -20,9 +20,11 @@
     <main>
         <header id="header">
             <section id="header-section" style="height: 270px; display: flex; align-items: flex-end; justify-content: center; border-bottom-right-radius: 0;">
-                <img class="thumbnailImage" style="object-fit: cover; object-position: 50% 0%; mask-image: linear-gradient(90deg, #0000, #ffff 50%);" src="/assets/images/aivibanner2026-blank.jpeg">
-                <div style="position: absolute; z-index: 2; left: 0; bottom: 0; width: 100%; height: 100px; background-image: linear-gradient(0deg, #000, #0000);"></div>
-                <h1 style="position: absolute; z-index: 2; left: 30px; top: 35px; line-height: 80px; font-family: Monopix;">aivi.<br><span class="success">&nbsp;party!</span></h1>                
+                <div style="user-select: none;">
+                    <img class="thumbnailImage" style="object-fit: cover; object-position: 50% 0%; mask-image: linear-gradient(90deg, #0000, #ffff 50%);" src="/assets/images/aivibanner2026-blank.jpeg" draggable="false">
+                    <div style="position: absolute; z-index: 2; left: 0; bottom: 0; width: 100%; height: 100px; background-image: linear-gradient(0deg, #000, #0000);"></div>
+                    <h1 style="position: absolute; z-index: 2; left: 30px; top: 35px; line-height: 80px; font-family: Monopix;">aivi.<br><span class="success">&nbsp;party!</span></h1>
+                </div>
                 <div style="position: relative; z-index: 2;">
                     <a id="index" class="button selected" href="/index.html"><img class="icon inline-left" src="/assets/icons/home.png">index</a>
                     <a id="about" class="button" href="/about.html"><img class="icon inline-left" src="/assets/icons/furry.png">about</a>
@@ -32,7 +34,7 @@
                     <a id="commissions" class="button" href="/commissions.html"><img class="icon inline-left" src="/assets/icons/pencil.png">commissions</a>
                     <a id="contact" class="button" href="/contact.html"><img class="icon inline-left" src="/assets/icons/mail.png">contact</a>
                 </div>
-                <img src="/assets/icons/scissors-cutting.png" style="width: 20px; position: absolute; bottom: 0; right: 10px; opacity: 0.2;">
+                <img src="/assets/icons/scissors-cutting.png" style="width: 20px; position: absolute; z-index: 3; bottom: 0; right: 10px; opacity: 0.2;">
             </section>
         </header>
         <noscript><section class="danger"><h3 class="danger"><img class="icon inline-left" src="/assets/icons/error.png">JavaScript disabled</h3><p>congrats, you tripped the noscript element! this site isn't gonna steal your data, but it relies on scripts to display navigation elements and fetch external content.</p><br><p>consider <a href="https://javascript.aivi.party/" target="_blank">enabling JavaScript</a> or whitelisting this site.</p></section></noscript>
@@ -71,7 +73,7 @@
                 </td>
                 <td class="primaryColumn" style="height: inherit;">
                     <section style="overflow: hidden; box-sizing: border-box; min-height: 630px; height: calc(100% + var(--border-width)); transform: translateY(calc(0px - (var(--border-spacing) + var(--border-width)))); border-top-left-radius: 0; border-top-right-radius: 0; border-top-style: dashed;">
-                        <img src="/assets/images/streetlamp.png" style="position: absolute; bottom: -24px; left: 0; width: 100%; z-index: 0; opacity: 0.7;">
+                        <img src="/assets/images/streetlamp.png" style="position: absolute; bottom: -24px; left: 0; width: 100%; z-index: 0; opacity: 0.7;" draggable="false">
                         <div style="position: relative; z-index: 1;">
                             <h3><span id="funTitle">not actually a party</span></h3>
                             <p><span id="greeting"><span class="h2" style="float: left; margin: -9px 4px -20px 0;">h</span>i</span>, i'm <a href="/about.html">aivi</a> <small>she/it</small>, a self-taught <span class="important">web dev</span> & <a href="/gallery.html">furry artist</a>. i pride myself in creating things with my own two paws, and i despise commercial social media platforms, so i built this website to share my work with the world on my <span class="important">own terms</span>.</p>
