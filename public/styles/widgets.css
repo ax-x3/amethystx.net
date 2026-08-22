@@ -2,7 +2,7 @@
     padding: 4px;
     text-align: center;
 }
-.changelog tr td, .facts tr td {
+.changelog tr td {
     &:first-of-type {
         text-align: right;
         width: 90px;
