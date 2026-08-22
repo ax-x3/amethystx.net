@@ -41,16 +41,30 @@ async function updateDiscord() {
             presenceIcon.src = "/assets/icons/status-offline.png";
             discordSection.className = "danger";
         }
-        if (resJSON.data.activities.length != 0) {
-            const status = resJSON.data.activities['0'];
-            if (status.name == "Custom Status") {
-                statusText = status.state.replace("<", "&lt;").replace(">", "&gt;");
-            } else {
-                statusText = "<small>*in " + status.name.replace("<", "&lt;").replace(">", "&gt;") + "*<small>";
+        const activities = resJSON.data.activities;
+        if (activities.length > 0) {
+            let activityList = [];
+            let statusText = "";
+            let customStatus = false;
+            for (let i = 0; i < activities.length; i++) {
+                activityName = activities[i].name;
+                if (activityName == "Custom Status") {
+                    if (!!activities[i].state) {
+                        customStatus = true;
+                        statusText += activities[i].state.replace("<", "&lt;").replace(">", "&gt;");
+                        if (activities.length > 1) {
+                            statusText += "<hr>";
+                        }
+                    }
+                } else if (activityName == "Apple Music") {
+                    statusText += "<small>listening to music</small><br>";
+                } else {
+                    statusText += "<small>in " + activityName.replace("<", "&lt;").replace(">", "&gt;") + "</small><br>";
+                }
             }
             statusLabel.innerHTML = statusText;
         } else {
-            statusLabel.innerHTML = "<small>*the keeper is silent now*</small>";
+            statusLabel.innerHTML = "<small>the keeper is silent now</small>";
         }
     } catch (error) {
         console.error(error);
