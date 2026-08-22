@@ -75,6 +75,6 @@ function updateFunTitle() {
         "you seem like a good one",
         "what are you lookin' at?"
     ];
-    document.getElementById("funTitle").innerHTML = titles[titles.length - 1];
-    // document.getElementById("funTitle").innerHTML = titles[Math.floor(Math.random() * titles.length)];
+    // document.getElementById("funTitle").innerHTML = titles[titles.length - 1];
+    document.getElementById("funTitle").innerHTML = titles[Math.floor(Math.random() * titles.length)];
 }
