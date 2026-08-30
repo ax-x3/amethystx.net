@@ -66,15 +66,16 @@ function updateFunTitle() {
         "use code AIVI for 20% off",
         "commit and sync",
         "headpats accepted here",
-        "artwork sold here",
         "covered in bite marks",
         "you're my favorite visitor btw",
         "all i got was this lousy title",
         "you going up or down?",
         "you a cop?",
         "you seem like a good one",
-        "what are you lookin' at?"
+        "what are you lookin' at?",
+        "home of the blåhaj",
+        "i ran out of title ideas"
     ];
-    // document.getElementById("funTitle").innerHTML = titles[titles.length - 1];
     document.getElementById("funTitle").innerHTML = titles[Math.floor(Math.random() * titles.length)];
+    // document.getElementById("funTitle").innerHTML = titles[titles.length - 1];
 }

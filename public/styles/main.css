@@ -74,7 +74,7 @@
     --crt-filter: var(--d-crt-filter);
     --trans-curve: cubic-bezier(0.24, 1, 0.3, 1);
     font-size: 18px;
-    font-family: "Monopix";
+    font-family: "Monopix", "Ubuntu Mono", monospace;
     color: var(--text);
     -webkit-text-size-adjust: none;
 }
@@ -97,7 +97,6 @@ main {
     filter: var(--crt-filter);
 }
 h1, h2, .h2, h3, h4, h5, h6 {
-    /* font-family: "Monopix"; */
     margin: 0;
     color: var(--accent);
     position: relative;
@@ -270,7 +269,7 @@ ul {
 small {
     display: inline-block;
     color: var(--small-text);
-    font-family: "Monopix XS";
+    font-family: "Monopix XS", "Ubuntu Mono", monospace;
     font-size: 15px;
     position: relative;
     text-shadow: 0.062em 0.062em var(--shadow), 0 0 0.25em var(--small-text);
@@ -287,7 +286,7 @@ iframe {
 }
 code, textarea {
     font-size: 0.8em;
-    font-family: "Ubuntu Mono";
+    font-family: "Ubuntu Mono", monospace;
     text-shadow: none;
     color: var(--text);
     background-color: var(--section-b);
@@ -337,7 +336,7 @@ marquee {
     max-width: 300px;
 }
 .num {
-    font-family: "Segris 16", "Splice";
+    font-family: "Segris 16", "Ubuntu Mono", monospace;
     white-space-collapse: preserve;
     &.pad {
         opacity: 0.1;
