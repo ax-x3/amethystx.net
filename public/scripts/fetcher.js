@@ -4,7 +4,7 @@ async function updateDiscord() {
     const statusLabel = document.getElementById("statusLabel");
     const discordSection = document.getElementById("discordSection");
     try {
-        const res = await fetch("https://aivi.party/services/discord-status");
+        const res = await fetch("https://aivi.party/services/lanyard");
         if (!res.ok) {
             presenceLabel.innerHTML = "STATUS";
             presenceLabel.className = "danger";
@@ -80,7 +80,7 @@ async function updateLastfm() {
     const playingLabel = document.getElementById("playingLabel");
     const musicIcon = document.getElementById("musicIcon");
     try {
-        const res = await fetch("https://aivi.party/services/last-played");
+        const res = await fetch("https://aivi.party/services/music");
         if (!res.ok) {
             titleLabel.innerHTML = "";
             artistLabel.innerHTML = "<span class='danger'><img class='icon inline-left' src='/assets/icons/error.png'>api error</span>";
@@ -92,16 +92,12 @@ async function updateLastfm() {
             throw new Error("Failed to fetch.");
         }
         const resJSON = await res.json();
-        const latest = resJSON.recenttracks.track[0];
-        var title = latest.name;
-        var artist = latest.artist["#text"];
-        const albumArt = latest.image[3]["#text"];
-        const link = latest.url;
-        try {
-            var playing = latest.date.uts;
-        } catch (error) {
-            var playing = "y";
-        }
+        const timestamp = resJSON.timestamp;
+        var title = resJSON.title;
+        var artist = resJSON.artist;
+        const image = resJSON.image;
+        const url = resJSON.url;
+        
         if (title != titleLabel.innerText.replace(/(\r\n|\n|\r)/gm, "")) {
             // 14 char for h3
             // 29 char for p
@@ -118,20 +114,20 @@ async function updateLastfm() {
             artistLabel.innerHTML = artist;
         }
         // hash for no-album-art image
-        if (albumArt.includes("2a96cbd8b46e442fc41c2b86b821562f")) {
+        if (image.includes("2a96cbd8b46e442fc41c2b86b821562f")) {
             albumImage.hidden = true;
         } else {
-            albumImage.src = albumArt;
+            albumImage.src = image;
             albumImage.hidden = false;
         }
-        linkLabel.href = link;
-        if (playing == "y") {
+        linkLabel.href = url;
+        if (timestamp == "now") {
             playingLabel.innerHTML = "PLAYING NOW";
             playingLabel.className = "important";
             musicIcon.style.animation = "bounce 1s steps(1) infinite";
             musicSection.className = "important";
         } else {
-            const timeSince = Math.floor(new Date().getTime() / 1000) - parseInt(playing);
+            const timeSince = Math.floor(new Date().getTime() / 1000) - parseInt(timestamp);
             if (timeSince <= 3600) {
                 var timeFormatted = Math.floor(timeSince / 60);
                 if (timeFormatted == 1)

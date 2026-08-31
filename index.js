@@ -4,23 +4,36 @@ export default {
         var path = pathname.toString().slice(1).split("/");
         if (path[0] == "services") {
             try {
-                if (path[1] == "last-played") {
+                if (path[1] == "music") {
                     const res = await fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=am3thystx&api_key=e7e7db3733ebd1413a1466b1ab6117de&format=json&limit=1");
                     if (!res.ok) {
-                        throw new Error("Response from Last.fm was not OK.");
+                        throw new Error("Bad response from Last.fm.");
                     }
                     const resJSON = await res.json();
-                    return new Response(JSON.stringify(resJSON), {
+                    const latest = resJSON.recenttracks.track[0];
+                    try {
+                        var playing = latest.date.uts;
+                    } catch (error) {
+                        var playing = "now";
+                    }
+                    return new Response(JSON.stringify({
+                        timestamp: playing,
+                        title: latest.name, 
+                        artist: latest.artist["#text"], 
+                        album: latest.album["#text"],
+                        image: latest.image[3]["#text"],
+                        url: latest.url
+                    }), {
                         headers: {
                             "content-type": "application/json",
                             // "Access-Control-Allow-Origin": "aivi.party",
                             "Access-Control-Allow-Origin": "*",
                         },
                     });
-                } else if (path[1] == "discord-status") {
+                } else if (path[1] == "lanyard") {
                     const res = await fetch("https://api.lanyard.rest/v1/users/802178124342493224");
                     if (!res.ok) {
-                        throw new Error("Response from Lanyard was not OK.");
+                        throw new Error("Bad response from Lanyard.");
                     }
                     const resJSON = await res.json();
                     return new Response(JSON.stringify(resJSON), {
@@ -31,6 +44,7 @@ export default {
                         },
                     });
                 } else if (path[1] == "hit-counter") {
+                    throw new Error("Hit counter temporarily disabled.");
                     var hits = await env.hitCounter.get('aivi.party');
                     hits = parseInt(hits);
                     if (search.includes("?a=add")) {
