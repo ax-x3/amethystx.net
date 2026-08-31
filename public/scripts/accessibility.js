@@ -35,7 +35,6 @@ function accChange() {
 function accApply() {
     const mainEle = document.querySelector("main:not(.accessory)");
     const root = document.querySelector(":root");
-    mainFont = "";
     if (options[0]) {
         root.style.setProperty('--crt-filter', 'none');
         root.style.setProperty('--crt-mask', 'none');
@@ -63,19 +62,20 @@ function accApply() {
         root.style.setProperty('--danger-b', 'var(--d-danger-b)');
     }
     if (options[2]) {
-        mainFont = "acc-monospace";
+        root.style.setProperty('--font-family', "acc-monospace");
+        root.style.setProperty('--font-family-s', "acc-monospace");
+    } else {
+        root.style.setProperty('--font-family', 'var(--d-font-family)');
+        root.style.setProperty('--font-family-s', 'var(--d-font-family-s)');
     }
-    mainEle.style.fontFamily = mainFont;
 }
 function accLoaded() {
     accUpdateCheckboxes();
     document.getElementById("accessibility").hidden = false;
-    document.getElementById("acc-menu").style.fontFamily = mainFont;
 }
 
 loadElement("accMenu.html", "accessibility");
 var options;
 var optionIds;
-var mainFont;
 accRecall();
 accApply();

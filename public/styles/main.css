@@ -73,8 +73,12 @@
     --d-crt-filter: brightness(1.5) saturate(1.25) blur(0.5px);
     --crt-filter: var(--d-crt-filter);
     --trans-curve: cubic-bezier(0.24, 1, 0.3, 1);
+    --d-font-family: "Monopix", "Ubuntu Mono", monospace;
+    --font-family: var(--d-font-family);
+    --d-font-family-s: "Monopix XS", "Ubuntu Mono", monospace;
+    --font-family-s: var(--d-font-family);
     font-size: 18px;
-    font-family: "Monopix", "Ubuntu Mono", monospace;
+    font-family: var(--font-family);
     color: var(--text);
     -webkit-text-size-adjust: none;
 }
@@ -269,7 +273,7 @@ ul {
 small {
     display: inline-block;
     color: var(--small-text);
-    font-family: "Monopix XS", "Ubuntu Mono", monospace;
+    font-family: var(--font-family-s);
     font-size: 15px;
     position: relative;
     text-shadow: 0.062em 0.062em var(--shadow), 0 0 0.25em var(--small-text);
