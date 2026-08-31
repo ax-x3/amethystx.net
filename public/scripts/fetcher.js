@@ -95,7 +95,7 @@ async function updateLastfm() {
         const latest = resJSON.recenttracks.track[0];
         var title = latest.name;
         var artist = latest.artist["#text"];
-        const albumArt = latest.image[2]["#text"];
+        const albumArt = latest.image[3]["#text"];
         const link = latest.url;
         try {
             var playing = latest.date.uts;

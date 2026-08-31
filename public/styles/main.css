@@ -438,13 +438,13 @@ marquee {
 :not(small) > .icon, .bright > .icon {
     filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--icon));
     &.success {
-        filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--success));
+        filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--success-b));
     }
     &.warning {
-        filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--warning));
+        filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--warning-b));
     }
     &.danger {
-        filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--danger));
+        filter: drop-shadow(0.1em 0.1em var(--shadow)) drop-shadow(0 0 0.25em var(--danger-b));
     }
 }
 .button {
