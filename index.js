@@ -44,7 +44,6 @@ export default {
                         },
                     });
                 } else if (path[1] == "hit-counter") {
-                    throw new Error("Hit counter temporarily disabled.");
                     var hits = await env.hitCounter.get('aivi.party');
                     hits = parseInt(hits);
                     if (search.includes("?a=add")) {
