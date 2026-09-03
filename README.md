@@ -26,4 +26,4 @@
 <br>
 `styles/                                ` - site CSS
 <br>
-`services/           (through HTTP only)` - API endpoints
+`api/                (through HTTP only)` - API endpoints

@@ -4,7 +4,7 @@ async function updateDiscord() {
     const statusLabel = document.getElementById("statusLabel");
     const discordSection = document.getElementById("discordSection");
     try {
-        const res = await fetch("https://aivi.party/services/lanyard");
+        const res = await fetch("https://aivi.party/api/discord");
         if (!res.ok) {
             presenceLabel.innerHTML = "STATUS";
             presenceLabel.className = "danger";
@@ -15,54 +15,47 @@ async function updateDiscord() {
             throw new Error("Failed to fetch.");
         }
         const resJSON = await res.json();
-        const presence = resJSON.data.discord_status;
-        if (presence == "online") {
+        const status = resJSON.status;
+        const activities = resJSON.activities;
+        const statusText = resJSON.text;
+        if (status == "online") {
             presenceLabel.innerHTML = "ONLINE";
             presenceLabel.className = "success";
             presenceIcon.className = "icon inline-left success";
             presenceIcon.src = "/assets/icons/status-online.png";
             discordSection.className = "success";
-        } else if (presence == "idle") {
+        } else if (status == "idle") {
             presenceLabel.innerHTML = "IDLE";
             presenceLabel.className = "warning";
             presenceIcon.className = "icon inline-left warning";
             presenceIcon.src = "/assets/icons/status-idle.png";
             discordSection.className = "warning";
-        } else if (presence == "dnd") {
+        } else if (status == "dnd") {
             presenceLabel.innerHTML = "DO NOT DISTURB";
             presenceLabel.className = "danger";
             presenceIcon.className = "icon inline-left danger";
             presenceIcon.src = "/assets/icons/status-dnd.png";
             discordSection.className = "danger";
-        } else if (presence == "offline") {
+        } else if (status == "offline") {
             presenceLabel.innerHTML = "OFFLINE";
             presenceLabel.className = "danger";
             presenceIcon.className = "icon inline-left danger";
             presenceIcon.src = "/assets/icons/status-offline.png";
             discordSection.className = "danger";
         }
-        const activities = resJSON.data.activities;
-        if (activities.length > 0) {
-            let activityList = [];
-            let statusText = "";
-            let customStatus = false;
-            for (let i = 0; i < activities.length; i++) {
-                activityName = activities[i].name;
-                if (activityName == "Custom Status") {
-                    if (!!activities[i].state) {
-                        customStatus = true;
-                        statusText += activities[i].state.replace("<", "&lt;").replace(">", "&gt;");
-                        if (activities.length > 1) {
-                            statusText += "<hr>";
-                        }
-                    }
-                } else if (activityName == "Apple Music") {
-                    statusText += "<small>listening to music</small><br>";
-                } else {
-                    statusText += "<small>in " + activityName.replace("<", "&lt;").replace(">", "&gt;") + "</small><br>";
-                }
+        let statusLabelText = statusText;
+        if (statusLabelText != "" && activities.length > 0) {
+            statusLabelText += "<hr>";
+        }
+        for (let i = 0; i < activities.length; i++) {
+            if (activities[i] == "Apple Music") {
+                statusLabelText += "<small>listening to music</small><br>";
+            } else {
+                statusLabelText += "<small>in " + activities[i].replace("<", "&lt;").replace(">", "&gt;") + "</small><br>";
             }
-            statusLabel.innerHTML = statusText;
+        }
+        if (statusLabelText != "") {
+            statusLabel.innerHTML = statusLabelText;
         } else {
             statusLabel.innerHTML = "<small>the keeper is silent now</small>";
         }
@@ -80,7 +73,7 @@ async function updateLastfm() {
     const playingLabel = document.getElementById("playingLabel");
     const musicIcon = document.getElementById("musicIcon");
     try {
-        const res = await fetch("https://aivi.party/services/music");
+        const res = await fetch("https://aivi.party/api/music");
         if (!res.ok) {
             titleLabel.innerHTML = "";
             artistLabel.innerHTML = "<span class='danger'><img class='icon inline-left' src='/assets/icons/error.png'>api error</span>";

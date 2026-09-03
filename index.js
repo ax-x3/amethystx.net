@@ -2,7 +2,7 @@ export default {
     async fetch(request, env, ctx) {
         const { search, pathname } = new URL(request.url);
         var path = pathname.toString().slice(1).split("/");
-        if (path[0] == "services") {
+        if (path[0] == "api") {
             try {
                 if (path[1] == "music") {
                     const res = await fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=am3thystx&api_key=e7e7db3733ebd1413a1466b1ab6117de&format=json&limit=1");
@@ -30,13 +30,31 @@ export default {
                             "Access-Control-Allow-Origin": "*",
                         },
                     });
-                } else if (path[1] == "lanyard") {
+                } else if (path[1] == "discord") {
                     const res = await fetch("https://api.lanyard.rest/v1/users/802178124342493224");
                     if (!res.ok) {
                         throw new Error("Bad response from Lanyard.");
                     }
                     const resJSON = await res.json();
-                    return new Response(JSON.stringify(resJSON), {
+                    const data = resJSON.data;
+                    const rawActivities = data.activities;
+                    var statusText = "";
+                    var activityNames = [];
+                    if (rawActivities.length > 0) {
+                        for (let i = 0; i < rawActivities.length; i++) {
+                            let activityName = rawActivities[i].name;
+                            if (activityName == "Custom Status" && !!rawActivities[i].state) {
+                                statusText = rawActivities[i].state;
+                            } else {
+                                activityNames.push(activityName);
+                            }
+                        }
+                    }
+                    return new Response(JSON.stringify({
+                        status: data.discord_status,
+                        text: statusText,
+                        activities: activityNames,
+                    }), {
                         headers: {
                             "content-type": "application/json",
                             // "Access-Control-Allow-Origin": "aivi.party",
